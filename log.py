@@ -6,7 +6,7 @@ os.makedirs(logDir, exist_ok=True)
 logFile = os.path.join(logDir, "ECGpy.log")
 
 # create logger
-Logger = logging.getLogger("ECGpy") # app logger
+Logger = logging.getLogger("<app name>") # app logger
 Logger.setLevel(logging.DEBUG) # includes all output
 
 fh = logging.FileHandler(logFile) # file handler 
