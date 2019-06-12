@@ -62,6 +62,7 @@ class NewLogger():
         return fh
 
     def check_level(self, level):
+        pkgLevels = [logging.DEBUG, logging.WARNING, logging.INFO, logging.ERROR, logging.CRITICAL]
         level = level.lower()
         if level == "debug":
             logLevel= logging.DEBUG
@@ -71,6 +72,8 @@ class NewLogger():
             logLevel = logging.WARNING
         elif level == "error":
             logLevel = logging.ERROR
+        elif level in pkgLevels:
+            logLevel = level
         else:
             raise Exception("levelOut is not configured correctly")
         return logLevel
