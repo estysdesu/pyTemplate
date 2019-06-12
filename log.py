@@ -3,7 +3,7 @@ import logging, os, time
 # create .log file directory and file
 logDir = os.path.join(os.getcwd(), ".log")
 os.makedirs(logDir, exist_ok=True)
-logFile = os.path.join(logDir, "ECGpy.log")
+logFile = os.path.join(logDir, "<app name>.log")
 
 # create logger
 Logger = logging.getLogger("<app name>") # app logger
