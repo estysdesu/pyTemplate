@@ -1,8 +1,8 @@
 import sys
-from log import Logger
+from logger import Log
 
 def main():
-    Logger.info("app starting")
+    Log.info("app starting")
     return
     
 if __name__ == "__main__":
