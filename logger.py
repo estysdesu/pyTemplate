@@ -62,23 +62,26 @@ class NewLogger():
         return fh
 
     def check_level(self, level):
-        pkgLevels = [logging.DEBUG, logging.WARNING, logging.INFO, logging.ERROR, logging.CRITICAL]
-        level = level.lower()
-        if level == "debug":
-            logLevel= logging.DEBUG
-        elif level == "info":
-            logLevel = logging.INFO
-        elif level == "warning":
-            logLevel = logging.WARNING
-        elif level == "error":
-            logLevel = logging.ERROR
-        elif level in pkgLevels:
+        logLevels = [logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL]
+        
+        if level in logLevels: # handdles passing a logging package logger
             logLevel = level
-        else:
-            raise Exception("levelOut is not configured correctly")
+            return logLevel # return early
+
+        level = level.lower()
+        logSwitch = {
+            "debug": logLevels[0],
+            "info": logLevels[1],
+            "warning": logLevels[2],
+            "error": logLevels[3],
+            "critical": logLevels[4]
+        }
+        logLevel = logSwitch.get(level, None)
+
+        if logLevel is None: # handles switch case
+            raise ValueError("one of the log levels set was not configured correctly")
+        
         return logLevel
-
+                
 if __name__ != "__main__":
-    import logger
-    Log = logger.NewLogger("myapp", "warning", fileDir=".", fileLevel="debug")
-
+    Log = logger.NewLogger("myapp", "warning", fileDir=".", fileLevel=logging.DEBUG)
