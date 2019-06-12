@@ -12,7 +12,7 @@ class NewLogger():
         self.info = self.logger.info
         self.warning = self.logger.warning
         self.error = self.logger.error
-
+        self.exception = self.logger.exception
 
     def new(self):
         logger = logging.getLogger(self.logName)
