@@ -37,7 +37,7 @@ class NewLogger():
         ch = logging.StreamHandler()
         level = self.check_level(levelConsole)
         ch.setLevel(level)
-        fmt =  logging.Formatter(fmt="%(filename)s:%(lineno)s - %(levelname)s: %(funcName)s: %(message)s")
+        fmt =  logging.Formatter(fmt="%(filename)s:%(lineno)s - %(levelname)s: %(message)s")
         ch.setFormatter(fmt)
         return ch
     
