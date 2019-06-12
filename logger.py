@@ -84,4 +84,5 @@ class NewLogger():
         return logLevel
                 
 if __name__ != "__main__":
+    import logger
     Log = logger.NewLogger("myapp", "warning", fileDir=".", fileLevel=logging.DEBUG)
