@@ -16,7 +16,8 @@ class NewLogger():
 
     def new(self):
         logger = logging.getLogger(self.logName)
-        logger.setLevel(logging.DEBUG) # minimal level that can be set
+        level = self.check_level(logging.DEBUG) # minimum accepted level
+        logger.setLevel(level) 
 
         consoleHandler = self.get_ch(self.level)
         logger.addHandler(consoleHandler)
