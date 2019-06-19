@@ -14,10 +14,11 @@ class NewLogger():
         self.error = self.logger.error
         self.exception = self.logger.exception
 
+
     def new(self):
         logger = logging.getLogger(self.logName)
         level = self.check_level(logging.DEBUG) # minimum accepted level
-        logger.setLevel(level) 
+        logger.setLevel(level)
 
         consoleHandler = self.get_ch(self.level)
         logger.addHandler(consoleHandler)
@@ -37,7 +38,7 @@ class NewLogger():
         ch = logging.StreamHandler()
         level = self.check_level(levelConsole)
         ch.setLevel(level)
-        fmt =  logging.Formatter(fmt="%(filename)s:%(lineno)s - %(levelname)s: %(message)s")
+        fmt =  logging.Formatter(fmt="%(levelname)-8s - %(filename)s:%(funcName)s:%(lineno)s - %(message)s")
         ch.setFormatter(fmt)
         return ch
     
@@ -56,7 +57,7 @@ class NewLogger():
         fh = logging.FileHandler(logFile)
         level = self.check_level(levelFile)
         fh.setLevel(level)
-        fmt = logging.Formatter(fmt="%(asctime)s: %(filename)s:%(lineno)s - %(levelname)s: %(funcName)s: %(message)s", datefmt="%y/%m/%d %H:%M:%S")
+        fmt = logging.Formatter(fmt="%(asctime)s - %(levelname)-8s - %(filename)s:%(funcName)s:%(lineno)s - %(message)s", datefmt="%y/%m/%d %H:%M:%S")
         fmt.converter = time.gmtime
         fh.setFormatter(fmt)
         return fh
@@ -85,4 +86,4 @@ class NewLogger():
                 
 if __name__ != "__main__":
     import logger
-    Log = logger.NewLogger("myapp", "warning", fileDir=".", fileLevel=logging.DEBUG)
+    Log = logger.NewLogger("ecgpy", logging.INFO, fileDir=".", fileLevel=logging.DEBUG)
