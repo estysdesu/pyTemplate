@@ -1,5 +1,4 @@
 import sys, logging
-from logger import Log
 
 def main():
     log.info("app starting")
