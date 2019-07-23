@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
+import os
 import sys
 
-import logHandlers
+import log_handlers
 
 
 def main():
@@ -13,5 +14,5 @@ def main():
 
 if __name__ == "__main__":
     log_dir = os.getcwd()
-    log = logHandlers.logger_setup(log_dir)
+    log = log_handlers.logger_setup(log_dir)
     sys.exit(main())
