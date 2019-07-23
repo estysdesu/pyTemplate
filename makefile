@@ -4,8 +4,8 @@ dir:=$(shell pwd)
 
 clean: SHELL:=$(shell which bash) # allows bashism
 clean:
-	find . -type d -not -path "./venv*" -name '__pycache__' -exec rm -r {} +
-	find . -type d -not -path "./venv*" -name '*mypy*' -exec rm -r {} +
+	find . -type d -name '__pycache__' -exec rm -r {} +
+	find . -type d -name '*mypy*' -exec rm -r {} +
 	rm -rf $(dir)/{.vscode,venv*}
 
 venv:
