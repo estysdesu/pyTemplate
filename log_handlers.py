@@ -6,13 +6,11 @@ import os
 import time
 from typing import *
 
-import server
-
 
 class FileHandler(logging.handlers.TimedRotatingFileHandler):
     def __init__(self, f_path, f_level=logging.DEBUG):
         super().__init__(f_path, when="D", interval=1, utc=True)
-        self.setLevel = f_level
+        self.setLevel(f_level)
         fmt = logging.Formatter(
             fmt="%(asctime)s - %(levelname)-8s - %(filename)s:%(funcName)s:%(lineno)s - %(message)s",
             datefmt="%y%m%d %H:%M:%S",
@@ -37,13 +35,13 @@ def logger_setup(name: str = "root", **kwargs: Union[str, int]) -> logging.Logge
     kwargs: stream_level, log_file_level, log_file_dir
     """
     log = logging.getLogger(name)
-    log.setLevel(0)  # init w/ lowest level
+    log.setLevel(logging.DEBUG)  # init w/ lowest level
 
     # stream logger
     if "stream_level" in kwargs.keys():
         stream_level = kwargs.get("stream_level")
     else:
-        stream_level = logging.DEBUG
+        stream_level = logging.INFO
     sh = StreamHandler(s_level=stream_level)
     log.addHandler(sh)
 
