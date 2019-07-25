@@ -6,6 +6,8 @@ import os
 import time
 from typing import *
 
+import server
+
 
 class FileHandler(logging.handlers.TimedRotatingFileHandler):
     def __init__(self, f_path, f_level=logging.DEBUG):
@@ -29,19 +31,32 @@ class StreamHandler(logging.StreamHandler):
         self.setFormatter(fmt)
 
 
-def logger_setup(name: str = "root", log_dir: Optional[str] = None) -> logging.Logger:
+def logger_setup(name: str = "root", **kwargs: Union[str, int]) -> logging.Logger:
+    """
+    Setup the logger.
+    kwargs: stream_level, log_file_level, log_file_dir
+    """
     log = logging.getLogger(name)
-    log.setLevel(logging.DEBUG)
+    log.setLevel(0)  # init w/ lowest level
 
-    stream_level = logging.DEBUG
+    # stream logger
+    if "stream_level" in kwargs.keys():
+        stream_level = kwargs.get("stream_level")
+    else:
+        stream_level = logging.DEBUG
     sh = StreamHandler(s_level=stream_level)
     log.addHandler(sh)
 
-    if log_dir is not None:
-        file_level = logging.INFO
-        os.makedirs(log_dir, exist_ok=True)
-        logFile = os.path.join(log_dir, log.name + ".log")
-        fh = FileHandler(logFile, f_level=file_level)
+    # file logger
+    if "log_file_level" in kwargs.keys():
+        log_file_level = kwargs.get("log_file_level")
+    else:
+        log_file_level = logging.DEBUG
+    if "log_file_dir" in kwargs.keys():
+        log_file_dir = kwargs.get("log_file_dir")
+        os.makedirs(log_file_dir, exist_ok=True)  # type: ignore
+        log_file_path = os.path.join(log_file_dir, log.name + ".log")  # type: ignore
+        fh = FileHandler(log_file_path, f_level=log_file_level)
         log.addHandler(fh)
 
     return log
