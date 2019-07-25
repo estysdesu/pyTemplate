@@ -9,7 +9,6 @@ import log_handlers
 
 def main():
     log.info("app starting")
-    return
 
 
 if __name__ == "__main__":
