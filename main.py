@@ -13,8 +13,8 @@ def main():
 
 
 if __name__ == "__main__":
-    log_dir = os.path.join(os.getcwd(), ".log")
+    log_file_dir = os.path.join(os.getcwd(), ".log")
     log = log_handlers.logger_setup(
-        name="root", log_file_dir=log_dir, log_file_level=logging.DEBUG)
+        name="root", log_file_dir=log_file_dir, log_file_level=logging.DEBUG)
     )
     sys.exit(main())
