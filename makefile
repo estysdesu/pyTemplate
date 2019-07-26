@@ -17,3 +17,6 @@ test:
 
 reformat:
 	black . --exclude 'venv/*'
+
+lint:
+	mypy --ignore-missing-imports --strict .
