@@ -14,3 +14,6 @@ venv:
 
 test:
 	python3 -m unittest discover
+
+reformat:
+	black . --exclude 'venv/*'
