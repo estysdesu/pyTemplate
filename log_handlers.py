@@ -12,7 +12,7 @@ class FileHandler(logging.handlers.TimedRotatingFileHandler):
         super().__init__(f_path, when="D", interval=1, utc=True)
         self.setLevel(f_level)
         fmt = logging.Formatter(
-            fmt="%(asctime)s - %(levelname)-8s - %(filename)s:%(funcName)s:%(lineno)s - %(message)s",
+            fmt="%(asctime)s %(name)-12s : %(levelname)-8s --> %(filename)s:%(funcName)s:%(lineno)s --> %(message)s",
             datefmt="%y%m%d %H:%M:%S",
         )
         fmt.converter = time.gmtime
@@ -24,7 +24,7 @@ class StreamHandler(logging.StreamHandler):
         super().__init__()
         self.setLevel(s_level)
         fmt = logging.Formatter(
-            fmt="%(levelname)-8s - %(filename)s:%(funcName)s:%(lineno)s - %(message)s"
+            fmt="%(name)-12s : %(levelname)-8s --> %(filename)s:%(funcName)s:%(lineno)s --> %(message)s"
         )
         self.setFormatter(fmt)
 
